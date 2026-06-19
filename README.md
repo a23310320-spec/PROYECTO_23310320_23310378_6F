@@ -42,20 +42,6 @@ La versatilidad de este modelo YOLO entrenado para la detección de plátanos pe
 
 ### Escenario A: Terminal de Autocobro (Cajero Inteligente de Supermercado)
 
-Problema a Resolver:
-  Reducir la fricción en el proceso de checkout y mitigar el fraude o errores operativos por parte del usuario en las básculas tradicionales de autoservicio, donde la selección manual del producto (como el         ingreso erróneo del código PLU) genera pérdidas económicas y demoras en las filas de atención.
-  *Arquitectura de Hardware Propuesta:
-    * Sistema de Adquisición de Imagen: Cámara web de alta resolución (1080p) con lente gran angular integrada en la estructura superior del cajero, orientada verticalmente hacia el plato de la báscula.
-    * Procesamiento de Datos: Computadora embebida de factor de forma pequeño (SFF) con aceleración de hardware para inteligencia artificial en el borde (Edge Computing), basada en módulos de procesamiento             neuronal optimizado.
-    * Interfaz de Control: Software del punto de venta (POS) que interactúa directamente con la interfaz del usuario y los sistemas de pago.
-  *Flujo de Funcionamiento:
-    1. El cliente coloca un racimo de plátanos sobre la báscula del cajero automático.
-    2. La cámara captura el flujo de video del área de pesaje de manera continua.
-    3. El script de inferencia procesa el cuadro en un tiempo de respuesta inferior a 15 milisegundos. Si el modelo YOLO detecta la clase `platano` con una confianza superior o igual al 85%, congela la                  inferencia.
-    4. El script envía un payload en formato JSON al software del punto de venta con la etiqueta del producto validado. El sistema del cajero cruza este dato con el peso medido por la báscula y                          actualiza automáticamente la pantalla de cobro con el producto correcto sin requerir interacción manual del usuario.
-
-### Escenario B: Cosecha Automatizada y Clasificación en Campo (Agrotecnología)
-
 * **Problema a Resolver:** Reducir la fricción en el proceso de checkout y mitigar el fraude o errores operativos por parte del usuario en las básculas tradicionales de autoservicio, donde la selección manual del producto (como el ingreso erróneo del código PLU) genera pérdidas económicas y demoras en las filas de atención.
 * **Arquitectura de Hardware Propuesta:**
   * **Sistema de Adquisición de Imagen:** Cámara web de alta resolución (1080p) con lente gran angular integrada en la estructura superior del cajero, orientada verticalmente hacia el plato de la báscula.
