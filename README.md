@@ -1,7 +1,7 @@
 # PROYECTO_23310320_23310378_6F
 Alumnos:
-Alex Durán de Huerta Jiménez - 23310378
-Luis Arturo Curiel Rodriguez - 23310320
+# Alex Durán de Huerta Jiménez - 23310378
+# Luis Arturo Curiel Rodriguez - 23310320
 
 # Sistema de Inspección y Clasificación Automatizada de plátanos basado en Visión Artificial mediante la Arquitectura YOLO
 
