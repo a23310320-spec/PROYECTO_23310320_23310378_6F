@@ -56,17 +56,29 @@ Problema a Resolver:
 
 ### Escenario B: Cosecha Automatizada y Clasificación en Campo (Agrotecnología)
 
-Problema a Resolver:
-  Optimizar los tiempos de recolección en campo, mitigar la escasez de mano de obra y estandarizar el control de calidad en tiempo real directamente en la maquinaria agrícola destinada a la recolección de          múltiples frutos simultáneos.
-  *Arquitectura de Hardware Propuesta:
-    *Sistema de Adquisición de Imagen: Cámaras de grado industrial con certificación IP67 (resistentes a polvo y agua), equipadas con sensores de obturación global (*global shutter*) para evitar el desenfoque         por movimiento, montadas sobre el brazo recolector o tolva del vehículo móvil.
-    *Procesamiento de Datos: Computadora industrial robustecida contra vibraciones mecánicas y altas temperaturas, equipada con una unidad de procesamiento gráfico (GPU) de arquitectura dedicada.
-    *Actuadores y Control: Un Controlador Lógico Programable (PLC) industrial comunicado mediante protocolos de bus de campo (Modbus TCP o CAN bus), acoplado a un sistema de actuadores neumáticos y                    electroválvulas en la banda transportadora del vehículo recolector.
-  *Flujo de Funcionamiento:
-    1. Durante la marcha del vehículo de recolección por las hileras de cultivo, las cámaras adquieren video en tiempo real de los frutos que ingresan a la tolva de clasificación.
-    2. El modelo YOLO realiza la segmentación y clasificación de los diferentes frutos en un entorno de fondo complejo compuesto por hojas, ramas y suelo.
-    3. Al identificar espacialmente los plátanos mediante las coordenadas de píxeles $(x, y)$ en la matriz de la imagen, el algoritmo calcula su posición relativa en la banda.
-    4. Si el fruto cumple con los criterios de detección y el umbral mínimo de confianza, el script envía una señal digital de activación al PLC. Este activa un pistón de rechazo o un deflector neumático en la          banda segmentadora para desviar mecánicamente los plátanos hacia su contenedor específico, separándolos automáticamente del resto de los frutos recolectados de manera simultánea.
+* **Problema a Resolver:** Reducir la fricción en el proceso de checkout y mitigar el fraude o errores operativos por parte del usuario en las básculas tradicionales de autoservicio, donde la selección manual del producto (como el ingreso erróneo del código PLU) genera pérdidas económicas y demoras en las filas de atención.
+* **Arquitectura de Hardware Propuesta:**
+  * **Sistema de Adquisición de Imagen:** Cámara web de alta resolución (1080p) con lente gran angular integrada en la estructura superior del cajero, orientada verticalmente hacia el plato de la báscula.
+  * **Procesamiento de Datos:** Computadora embebida de factor de forma pequeño (SFF) con aceleración de hardware para inteligencia artificial en el borde (Edge Computing), basada en módulos de procesamiento neuronal optimizado.
+  * **Interfaz de Control:** Software del punto de venta (POS) que interactúa directamente con la interfaz del usuario y los sistemas de pago.
+* **Flujo de Funcionamiento:**
+  1. El cliente coloca un racimo de plátanos sobre la báscula del cajero automático.
+  2. La cámara captura el flujo de video del área de pesaje de manera continua.
+  3. El script de inferencia procesa el cuadro en un tiempo de respuesta inferior a 15 milisegundos. Si el modelo YOLO detecta la clase `platano` con una confianza superior o igual al 85%, congela la inferencia.
+  4. El script envía un payload en formato JSON al software del punto de venta con la etiqueta del producto validado. El sistema del cajero cruza este dato con el peso medido por la báscula y actualiza automáticamente la pantalla de cobro con el producto correcto sin requerir interacción manual del usuario.
+
+### Escenario B: Cosecha Automatizada y Clasificación en Campo (Agrotecnología)
+
+* **Problema a Resolver:** Optimizar los tiempos de recolección en campo, mitigar la escasez de mano de obra y estandarizar el control de calidad en tiempo real directamente en la maquinaria agrícola destinada a la recolección de múltiples frutos simultáneos.
+* **Arquitectura de Hardware Propuesta:**
+  * **Sistema de Adquisición de Imagen:** Cámaras de grado industrial con certificación IP67 (resistentes a polvo y agua), equipadas con sensores de obturación global (*global shutter*) para evitar el desenfoque por movimiento, montadas sobre el brazo recolector o tolva del vehículo móvil.
+  * **Procesamiento de Datos:** Computadora industrial robustecida contra vibraciones mecánicas y altas temperaturas, equipada con una unidad de procesamiento gráfico (GPU) de arquitectura dedicada.
+  * **Actuadores y Control:** Un Controlador Lógico Programable (PLC) industrial comunicado mediante protocolos de bus de campo (Modbus TCP o CAN bus), acoplado a un sistema de actuadores neumáticos y electroválvulas en la banda transportadora del vehículo recolector.
+* **Flujo de Funcionamiento:**
+  1. Durante la marcha del vehículo de recolección por las hileras de cultivo, las cámaras adquieren video en tiempo real de los frutos que ingresan a la tolva de clasificación.
+  2. El modelo YOLO realiza la segmentación y clasificación de los diferentes frutos en un entorno de fondo complejo compuesto por hojas, ramas y suelo.
+  3. Al identificar espacialmente los plátanos mediante las coordenadas de píxeles $(x, y)$ en la matriz de la imagen, el algoritmo calcula su posición relativa en la banda.
+  4. Si el fruto cumple con los criterios de detección y el umbral mínimo de confianza, el script envía una señal digital de activación al PLC. Este activa un pistón de rechazo o un deflector neumático en la banda segmentadora para desviar mecánicamente los plátanos hacia su contenedor específico, separándolos automáticamente del resto de los frutos recolectados de manera simultánea.
 
 ## 4. Evidencias de Funcionamiento
 
