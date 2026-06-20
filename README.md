@@ -13,7 +13,7 @@
    * [2.2 Descripción del Hardware Propuesto](#22-descripción-del-hardware-propuesto)
    * [2.3 Flujo de Funcionamiento del Sistema](#23-flujo-de-funcionamiento-del-sistema)
 3. [Requisitos del Sistema](#requisitos-del-sistema)
-4. [Instrucciones para Correr el Código](#instrucciones-para-correr-el-código)
+4. [Instrucciones de Instalación y Uso](#instrucciones-de-instalación-y-uso)
 
 ---
 
@@ -52,33 +52,7 @@ El proceso de inspección automatizada se rige bajo la siguiente secuencia lógi
 
 ---
 
-## Requisitos del Sistema
-El archivo `requirements.txt` contiene las dependencias esenciales para desplegar la aplicación:
-```
-ultralytics>=8.0.0
-roboflow>=1.0.0
-opencv-python>=4.6.0
-numpy>=1.21.0
-```
-## Instrucciones para Correr el Código
-
-### 1. Preparación del Entorno local
-Clone el repositorio desde la terminal e instale las librerías del sistema:
-```
-git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
-cd tu-repositorio
-pip install -r requirements.txt
-```
-### 2. Proceso de Entrenamiento
-Para ejecutar el script de entrenamiento y reentrenar la red neuronal con el conjunto de datos de Roboflow, ejecute:
-```
-python entrenar.py
-```
-### 3. Ejecución del Sistema de Inferencia y Conteo en Campo
-Para activar la cámara de inspección en tiempo real, procesar el flujo de video y desplegar el contador de calidad en la terminal de control, utilice el siguiente comando:
-
-
-## 2. Instrucciones de Instalación y Uso
+## Instrucciones de Instalación y Uso
 
 ### Requisitos previos
 * Python 3.8 o superior
@@ -89,8 +63,8 @@ Para activar la cámara de inspección en tiempo real, procesar el flujo de vide
 
 1. **Clonar el repositorio**
 ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
-   cd tu_repositorio
+   git clone https://github.com/tu_usuario/PROYECTO_23310320_23310378_6F
+   cd PROYECTO_23310320_23310378_6F
 ```
 
 2. **Crear e inicializar un entorno virtual**
