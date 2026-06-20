@@ -80,18 +80,77 @@ Para activar la cámara de inspección en tiempo real, procesar el flujo de vide
 
 ## 2. Instrucciones de Instalación y Uso
 
-Requisitos Previos:
-  * Python 3.8 o superior
-  * Entorno de ejecución con soporte para CUDA (opcional, para aceleración por GPU)
+### Requisitos previos
+* Python 3.8 o superior
+* Cuenta gratuita en [Roboflow](https://roboflow.com) (para descargar el dataset del proyecto `comvis-banana/comvis-banana-2`)
+* Entorno con soporte CUDA (opcional — acelera el entrenamiento; el proyecto también corre en CPU, solo que más lento)
 
-Configuración del Entorno:
-1. Clonar el repositorio:
-   git clone [https://github.com/tu_usuario/tu_repositorio.git](https://github.com/tu_usuario/tu_repositorio.git)
+### Configuración del entorno
+
+1. **Clonar el repositorio**
+```bash
+   git clone https://github.com/tu_usuario/tu_repositorio.git
    cd tu_repositorio
+```
 
-2. Crear e inicializar un entorno virtual:
+2. **Crear e inicializar un entorno virtual**
+```bash
    python -m venv env
    # En Windows:
    env\Scripts\activate
    # En Linux/macOS:
    source env/bin/activate
+```
+
+3. **Instalar las dependencias**
+```bash
+   pip install -r requirements.txt
+```
+   Esto instala `roboflow` (descarga del dataset) y `ultralytics` (entrenamiento e inferencia con YOLOv8).
+
+4. **Configurar tu clave de API de Roboflow**
+
+   Por seguridad, la API key **no** debe quedar escrita en el código que subes a GitHub. Defínela como variable de entorno:
+```bash
+   # Linux/macOS
+   export ROBOFLOW_API_KEY="tu_api_key_aqui"
+   # Windows (PowerShell)
+   $env:ROBOFLOW_API_KEY="tu_api_key_aqui"
+```
+   Tu clave personal se obtiene gratis en: https://app.roboflow.com/settings/api
+
+5. **Descargar el dataset y entrenar el modelo**
+```python
+   from roboflow import Roboflow
+   import os
+
+   rf = Roboflow(api_key=os.environ["ROBOFLOW_API_KEY"])
+   project = rf.workspace("comvis-banana").project("comvis-banana-2")
+   version = project.version(1)
+   dataset = version.download("yolov8")   # ver nota abajo
+
+   import ultralytics
+   ultralytics.checks()   # verifica si hay GPU disponible o se usará CPU
+
+   from ultralytics import YOLO
+   model = YOLO('yolov8n.pt')
+   results = model.train(
+       data=f"{dataset.location}/data.yaml",
+       epochs=30,
+       imgsz=640,
+       plots=True
+   )
+```
+
+6. **Probar el modelo con una imagen de ejemplo**
+```python
+   !wget -nc <URL_de_una_imagen_de_platanos> -O imagen_prueba.jpg
+
+   from PIL import Image
+   results = model('imagen_prueba.jpg')
+   for r in results:
+       im_array = r.plot()
+       im = Image.fromarray(im_array[..., ::-1])
+       display(im)
+```
+   Las imágenes resultantes (con bounding boxes y nivel de maduración) se guardan automáticamente en `runs/detect/`.
