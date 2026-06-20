@@ -1,4 +1,11 @@
+# Biblioteca principal para el desarrollo, entrenamiento e inferencia del modelo YOLOv8
 ultralytics>=8.0.0
+
+# Herramienta para la gestión, autenticación y descarga automatizada del dataset desde la nube
 roboflow>=1.0.0
+
+# Librería de visión artificial para el manejo de la webcam, procesamiento de imágenes y dibujo de bounding boxes
 opencv-python>=4.6.0
+
+# Soporte matemático para el manejo de arreglos multidimensionales y matrices de las imágenes
 numpy>=1.21.0
